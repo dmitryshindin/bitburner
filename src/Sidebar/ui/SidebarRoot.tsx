@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import clsx from "clsx";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import createStyles from "@mui/styles/createStyles";
@@ -111,6 +112,7 @@ interface IProps {
 }
 
 export function SidebarRoot(props: IProps): React.ReactElement {
+  const { t } = useTranslation(['sidebar']);
   const setRerender = useState(false)[1];
   function rerender(): void {
     setRerender((old) => !old);
@@ -364,11 +366,11 @@ export function SidebarRoot(props: IProps): React.ReactElement {
       <List>
         <ListItem classes={{ root: classes.listitem }} button onClick={() => setHackingOpen((old) => !old)}>
           <ListItemIcon>
-            <Tooltip title={!open ? "Hacking" : ""}>
+            <Tooltip title={!open ? t("sidebar:hacking") : ""}>
               <ComputerIcon color="primary" />
             </Tooltip>
           </ListItemIcon>
-          <ListItemText primary={<Typography>Hacking</Typography>} />
+          <ListItemText primary={<Typography>{t("sidebar:hacking")}</Typography>} />
           {hackingOpen ? <ExpandLessIcon color="primary" /> : <ExpandMoreIcon color="primary" />}
         </ListItem>
         <Collapse in={hackingOpen} timeout="auto" unmountOnExit>
@@ -376,14 +378,14 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Terminal"}
+              key={t("sidebar:terminal")}
               className={clsx({
                 [classes.active]: props.page === Page.Terminal,
               })}
               onClick={clickTerminal}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Terminal" : ""}>
+                <Tooltip title={!open ? t("sidebar:terminal") : ""}>
                   <LastPageIcon
                     color={flashTerminal ? "error" : props.page !== Page.Terminal ? "secondary" : "primary"}
                   />
@@ -391,41 +393,41 @@ export function SidebarRoot(props: IProps): React.ReactElement {
               </ListItemIcon>
               <ListItemText>
                 <Typography color={flashTerminal ? "error" : props.page !== Page.Terminal ? "secondary" : "primary"}>
-                  Terminal
+                  {t("sidebar:terminal")}
                 </Typography>
               </ListItemText>
             </ListItem>
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Script Editor"}
+              key={t("sidebar:scriptEditor")}
               className={clsx({
                 [classes.active]: props.page === Page.ScriptEditor,
               })}
               onClick={clickScriptEditor}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Script Editor" : ""}>
+                <Tooltip title={!open ? t("sidebar:scriptEditor") : ""}>
                   <CreateIcon color={props.page !== Page.ScriptEditor ? "secondary" : "primary"} />
                 </Tooltip>
               </ListItemIcon>
               <ListItemText>
                 <Typography color={props.page !== Page.ScriptEditor ? "secondary" : "primary"}>
-                  Script Editor
+                  {t("sidebar:scriptEditor")}
                 </Typography>
               </ListItemText>
             </ListItem>
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Active Scripts"}
+              key={t("sidebar:activeScripts")}
               className={clsx({
                 [classes.active]: props.page === Page.ActiveScripts,
               })}
               onClick={clickActiveScripts}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Active Scripts" : ""}>
+                <Tooltip title={!open ? t("sidebar:activeScripts") : ""}>
                   <StorageIcon
                     color={flashActiveScripts ? "error" : props.page !== Page.ActiveScripts ? "secondary" : "primary"}
                   />
@@ -435,14 +437,14 @@ export function SidebarRoot(props: IProps): React.ReactElement {
                 <Typography
                   color={flashActiveScripts ? "error" : props.page !== Page.ActiveScripts ? "secondary" : "primary"}
                 >
-                  Active Scripts
+                  {t("sidebar:activeScripts")}
                 </Typography>
               </ListItemText>
             </ListItem>
             {canCreateProgram && (
               <ListItem
                 button
-                key={"Create Program"}
+                key={t("sidebar:createProgram")}
                 className={clsx({
                   [classes.active]: props.page === Page.CreateProgram,
                 })}
@@ -450,14 +452,14 @@ export function SidebarRoot(props: IProps): React.ReactElement {
               >
                 <ListItemIcon>
                   <Badge badgeContent={programCount > 0 ? programCount : undefined} color="error">
-                    <Tooltip title={!open ? "Create Program" : ""}>
+                    <Tooltip title={!open ? t("sidebar:createProgram") : ""}>
                       <BugReportIcon color={props.page !== Page.CreateProgram ? "secondary" : "primary"} />
                     </Tooltip>
                   </Badge>
                 </ListItemIcon>
                 <ListItemText>
                   <Typography color={props.page !== Page.CreateProgram ? "secondary" : "primary"}>
-                    Create Program
+                    {t("sidebar:createProgram")}
                   </Typography>
                 </ListItemText>
               </ListItem>
@@ -465,20 +467,20 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             {canStaneksGift && (
               <ListItem
                 button
-                key={"Staneks Gift"}
+                key={t("sidebar:staneksGift")}
                 className={clsx({
                   [classes.active]: props.page === Page.StaneksGift,
                 })}
                 onClick={clickStaneksGift}
               >
                 <ListItemIcon>
-                  <Tooltip title={!open ? "Stanek's Gift" : ""}>
+                  <Tooltip title={!open ? t("sidebar:staneksGift") : ""}>
                     <DeveloperBoardIcon color={props.page !== Page.StaneksGift ? "secondary" : "primary"} />
                   </Tooltip>
                 </ListItemIcon>
                 <ListItemText>
                   <Typography color={props.page !== Page.StaneksGift ? "secondary" : "primary"}>
-                    Stanek's Gift
+                    {t("sidebar:staneksGift")}
                   </Typography>
                 </ListItemText>
               </ListItem>
@@ -489,30 +491,30 @@ export function SidebarRoot(props: IProps): React.ReactElement {
         <Divider />
         <ListItem classes={{ root: classes.listitem }} button onClick={() => setCharacterOpen((old) => !old)}>
           <ListItemIcon>
-            <Tooltip title={!open ? "Character" : ""}>
+            <Tooltip title={!open ? t("sidebar:character") : ""}>
               <AccountBoxIcon color="primary" />
             </Tooltip>
           </ListItemIcon>
-          <ListItemText primary={<Typography>Character</Typography>} />
+          <ListItemText primary={<Typography>{t("sidebar:character")}</Typography>} />
           {characterOpen ? <ExpandLessIcon color="primary" /> : <ExpandMoreIcon color="primary" />}
         </ListItem>
         <Collapse in={characterOpen} timeout="auto" unmountOnExit>
           <ListItem
             button
-            key={"Stats"}
+            key={t("sidebar:stats")}
             className={clsx({
               [classes.active]: props.page === Page.Stats,
             })}
             onClick={clickStats}
           >
             <ListItemIcon>
-              <Tooltip title={!open ? "Stats" : ""}>
+              <Tooltip title={!open ? t("sidebar:stats") : ""}>
                 <EqualizerIcon color={flashStats ? "error" : props.page !== Page.Stats ? "secondary" : "primary"} />
               </Tooltip>
             </ListItemIcon>
             <ListItemText>
               <Typography color={flashStats ? "error" : props.page !== Page.Stats ? "secondary" : "primary"}>
-                Stats
+                {t("sidebar:stats")}
               </Typography>
             </ListItemText>
           </ListItem>
@@ -520,7 +522,7 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Factions"}
+              key={t("sidebar:factions")}
               className={clsx({
                 [classes.active]: [Page.Factions, Page.Faction].includes(props.page),
               })}
@@ -528,14 +530,14 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             >
               <ListItemIcon>
                 <Badge badgeContent={invitationsCount !== 0 ? invitationsCount : undefined} color="error">
-                  <Tooltip title={!open ? "Factions" : ""}>
+                  <Tooltip title={!open ? t("sidebar:factions") : ""}>
                     <ContactsIcon color={![Page.Factions, Page.Faction].includes(props.page) ? "secondary" : "primary"} />
                   </Tooltip>
                 </Badge>
               </ListItemIcon>
               <ListItemText>
                 <Typography color={![Page.Factions, Page.Faction].includes(props.page) ? "secondary" : "primary"}>
-                  Factions
+                  {t("sidebar:factions")}
                 </Typography>
               </ListItemText>
             </ListItem>
@@ -544,7 +546,7 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Augmentations"}
+              key={t("sidebar:augmentations")}
               className={clsx({
                 [classes.active]: props.page === Page.Augmentations,
               })}
@@ -552,7 +554,7 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             >
               <ListItemIcon>
                 <Badge badgeContent={augmentationCount !== 0 ? augmentationCount : undefined} color="error">
-                  <Tooltip title={!open ? "Augmentations" : ""}>
+                  <Tooltip title={!open ? t("sidebar:augmentations") : ""}>
                     <DoubleArrowIcon
                       style={{ transform: "rotate(-90deg)" }}
                       color={props.page !== Page.Augmentations ? "secondary" : "primary"}
@@ -562,27 +564,27 @@ export function SidebarRoot(props: IProps): React.ReactElement {
               </ListItemIcon>
               <ListItemText>
                 <Typography color={props.page !== Page.Augmentations ? "secondary" : "primary"}>
-                  Augmentations
+                  {t("sidebar:augmentations")}
                 </Typography>
               </ListItemText>
             </ListItem>
           )}
           <ListItem
             button
-            key={"Hacknet"}
+            key={t("sidebar:hacknet")}
             className={clsx({
               [classes.active]: props.page === Page.Hacknet,
             })}
             onClick={clickHacknet}
           >
             <ListItemIcon>
-              <Tooltip title={!open ? "Hacknet" : ""}>
+              <Tooltip title={!open ? t("sidebar:hacknet") : ""}>
                 <AccountTreeIcon color={flashHacknet ? "error" : props.page !== Page.Hacknet ? "secondary" : "primary"} />
               </Tooltip>
             </ListItemIcon>
             <ListItemText>
               <Typography color={flashHacknet ? "error" : props.page !== Page.Hacknet ? "secondary" : "primary"}>
-                Hacknet
+                {t("sidebar:hacknet")}
               </Typography>
             </ListItemText>
           </ListItem>
@@ -590,19 +592,19 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Sleeves"}
+              key={t("sidebar:sleeves")}
               className={clsx({
                 [classes.active]: props.page === Page.Sleeves,
               })}
               onClick={clickSleeves}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Sleeves" : ""}>
+                <Tooltip title={!open ? t("sidebar:sleeves") : ""}>
                   <PeopleAltIcon color={props.page !== Page.Sleeves ? "secondary" : "primary"} />
                 </Tooltip>
               </ListItemIcon>
               <ListItemText>
-                <Typography color={props.page !== Page.Sleeves ? "secondary" : "primary"}>Sleeves</Typography>
+                <Typography color={props.page !== Page.Sleeves ? "secondary" : "primary"}>{t("sidebar:sleeves")}</Typography>
               </ListItemText>
             </ListItem>
           )}
@@ -611,17 +613,17 @@ export function SidebarRoot(props: IProps): React.ReactElement {
         <Divider />
         <ListItem classes={{ root: classes.listitem }} button onClick={() => setWorldOpen((old) => !old)}>
           <ListItemIcon>
-            <Tooltip title={!open ? "World" : ""}>
+            <Tooltip title={!open ? t("sidebar:world") : ""}>
               <PublicIcon color="primary" />
             </Tooltip>
           </ListItemIcon>
-          <ListItemText primary={<Typography>World</Typography>} />
+          <ListItemText primary={<Typography>{t("sidebar:world")}</Typography>} />
           {worldOpen ? <ExpandLessIcon color="primary" /> : <ExpandMoreIcon color="primary" />}
         </ListItem>
         <Collapse in={worldOpen} timeout="auto" unmountOnExit>
           <ListItem
             button
-            key={"City"}
+            key={t("sidebar:city")}
             className={clsx({
               [classes.active]:
                 props.page === Page.City || props.page === Page.Resleeves || props.page === Page.Location,
@@ -629,50 +631,50 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             onClick={clickCity}
           >
             <ListItemIcon>
-              <Tooltip title={!open ? "City" : ""}>
+              <Tooltip title={!open ? t("sidebar:city") : ""}>
                 <LocationCityIcon color={flashCity ? "error" : props.page !== Page.City ? "secondary" : "primary"} />
               </Tooltip>
             </ListItemIcon>
             <ListItemText>
               <Typography color={flashCity ? "error" : props.page !== Page.City ? "secondary" : "primary"}>
-                City
+                {t("sidebar:city")}
               </Typography>
             </ListItemText>
           </ListItem>
           <ListItem
             button
-            key={"Travel"}
+            key={t("sidebar:travel")}
             className={clsx({
               [classes.active]: props.page === Page.Travel,
             })}
             onClick={clickTravel}
           >
             <ListItemIcon>
-              <Tooltip title={!open ? "Travel" : ""}>
+              <Tooltip title={!open ? t("sidebar:travel") : ""}>
                 <AirplanemodeActiveIcon color={props.page !== Page.Travel ? "secondary" : "primary"} />
               </Tooltip>
             </ListItemIcon>
             <ListItemText>
-              <Typography color={props.page !== Page.Travel ? "secondary" : "primary"}>Travel</Typography>
+              <Typography color={props.page !== Page.Travel ? "secondary" : "primary"}>{t("sidebar:travel")}</Typography>
             </ListItemText>
           </ListItem>
           {canJob && (
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Job"}
+              key={t("sidebar:job")}
               className={clsx({
                 [classes.active]: props.page === Page.Job,
               })}
               onClick={clickJob}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Job" : ""}>
+                <Tooltip title={!open ? t("sidebar:job") : ""}>
                   <WorkIcon color={props.page !== Page.Job ? "secondary" : "primary"} />
                 </Tooltip>
               </ListItemIcon>
               <ListItemText>
-                <Typography color={props.page !== Page.Job ? "secondary" : "primary"}>Job</Typography>
+                <Typography color={props.page !== Page.Job ? "secondary" : "primary"}>{t("sidebar:job")}</Typography>
               </ListItemText>
             </ListItem>
           )}
@@ -680,19 +682,19 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Stock Market"}
+              key={t("sidebar:stockMarket")}
               className={clsx({
                 [classes.active]: props.page === Page.StockMarket,
               })}
               onClick={clickStockMarket}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Stock Market" : ""}>
+                <Tooltip title={!open ? t("sidebar:stockMarket") : ""}>
                   <TrendingUpIcon color={props.page !== Page.StockMarket ? "secondary" : "primary"} />
                 </Tooltip>
               </ListItemIcon>
               <ListItemText>
-                <Typography color={props.page !== Page.StockMarket ? "secondary" : "primary"}>Stock Market</Typography>
+                <Typography color={props.page !== Page.StockMarket ? "secondary" : "primary"}>{t("sidebar:stockMarket")}</Typography>
               </ListItemText>
             </ListItem>
           )}
@@ -700,19 +702,19 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Bladeburner"}
+              key={t("sidebar:bladeburner")}
               className={clsx({
                 [classes.active]: props.page === Page.Bladeburner,
               })}
               onClick={clickBladeburner}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Bladeburner" : ""}>
+                <Tooltip title={!open ? t("sidebar:bladeburner") : ""}>
                   <FormatBoldIcon color={props.page !== Page.Bladeburner ? "secondary" : "primary"} />
                 </Tooltip>
               </ListItemIcon>
               <ListItemText>
-                <Typography color={props.page !== Page.Bladeburner ? "secondary" : "primary"}>Bladeburner</Typography>
+                <Typography color={props.page !== Page.Bladeburner ? "secondary" : "primary"}>{t("sidebar:bladeburner")}</Typography>
               </ListItemText>
             </ListItem>
           )}
@@ -720,19 +722,19 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Corp"}
+              key={t("sidebar:corp")}
               className={clsx({
                 [classes.active]: props.page === Page.Corporation,
               })}
               onClick={clickCorp}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Corp" : ""}>
+                <Tooltip title={!open ? t("sidebar:corp") : ""}>
                   <BusinessIcon color={props.page !== Page.Corporation ? "secondary" : "primary"} />
                 </Tooltip>
               </ListItemIcon>
               <ListItemText>
-                <Typography color={props.page !== Page.Corporation ? "secondary" : "primary"}>Corp</Typography>
+                <Typography color={props.page !== Page.Corporation ? "secondary" : "primary"}>{t("sidebar:corp")}</Typography>
               </ListItemText>
             </ListItem>
           )}
@@ -740,19 +742,19 @@ export function SidebarRoot(props: IProps): React.ReactElement {
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Gang"}
+              key={t("sidebar:gang")}
               className={clsx({
                 [classes.active]: props.page === Page.Gang,
               })}
               onClick={clickGang}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Gang" : ""}>
+                <Tooltip title={!open ? t("sidebar:gang") : ""}>
                   <SportsMmaIcon color={props.page !== Page.Gang ? "secondary" : "primary"} />
                 </Tooltip>
               </ListItemIcon>
               <ListItemText>
-                <Typography color={props.page !== Page.Gang ? "secondary" : "primary"}>Gang</Typography>
+                <Typography color={props.page !== Page.Gang ? "secondary" : "primary"}>{t("sidebar:gang")}</Typography>
               </ListItemText>
             </ListItem>
           )}
@@ -761,101 +763,101 @@ export function SidebarRoot(props: IProps): React.ReactElement {
         <Divider />
         <ListItem classes={{ root: classes.listitem }} button onClick={() => setHelpOpen((old) => !old)}>
           <ListItemIcon>
-            <Tooltip title={!open ? "Help" : ""}>
+            <Tooltip title={!open ? t("sidebar:help") : ""}>
               <LiveHelpIcon color="primary" />
             </Tooltip>
           </ListItemIcon>
-          <ListItemText primary={<Typography>Help</Typography>} />
+          <ListItemText primary={<Typography>{t("sidebar:help")}</Typography>} />
           {helpOpen ? <ExpandLessIcon color="primary" /> : <ExpandMoreIcon color="primary" />}
         </ListItem>
         <Collapse in={helpOpen} timeout="auto" unmountOnExit>
           <ListItem
             button
-            key={"Milestones"}
+            key={t("sidebar:milestones")}
             className={clsx({
               [classes.active]: props.page === Page.Milestones,
             })}
             onClick={clickMilestones}
           >
             <ListItemIcon>
-              <Tooltip title={!open ? "Milestones" : ""}>
+              <Tooltip title={!open ? t("sidebar:milestones") : ""}>
                 <CheckIcon color={props.page !== Page.Milestones ? "secondary" : "primary"} />
               </Tooltip>
             </ListItemIcon>
             <ListItemText>
-              <Typography color={props.page !== Page.Milestones ? "secondary" : "primary"}>Milestones</Typography>
+              <Typography color={props.page !== Page.Milestones ? "secondary" : "primary"}>{t("sidebar:milestones")}</Typography>
             </ListItemText>
           </ListItem>
           <ListItem
             button
-            key={"Tutorial"}
+            key={t("sidebar:tutorial")}
             className={clsx({
               [classes.active]: props.page === Page.Tutorial,
             })}
             onClick={clickTutorial}
           >
             <ListItemIcon>
-              <Tooltip title={!open ? "Tutorial" : ""}>
+              <Tooltip title={!open ? t("sidebar:tutorial") : ""}>
                 <HelpIcon color={flashTutorial ? "error" : props.page !== Page.Tutorial ? "secondary" : "primary"} />
               </Tooltip>
             </ListItemIcon>
             <ListItemText>
               <Typography color={flashTutorial ? "error" : props.page !== Page.Tutorial ? "secondary" : "primary"}>
-                Tutorial
+                {t("sidebar:tutorial")}
               </Typography>
             </ListItemText>
           </ListItem>
           <ListItem
             button
-            key={"Achievements"}
+            key={t("sidebar:achievements")}
             className={clsx({
               [classes.active]: props.page === Page.Achievements,
             })}
             onClick={clickAchievements}
           >
             <ListItemIcon>
-              <Tooltip title={!open ? "Achievements" : ""}>
+              <Tooltip title={!open ? t("sidebar:achievements") : ""}>
                 <EmojiEventsIcon color={props.page !== Page.Achievements ? "secondary" : "primary"} />
               </Tooltip>
             </ListItemIcon>
             <ListItemText>
-              <Typography color={props.page !== Page.Achievements ? "secondary" : "primary"}>Achievements</Typography>
+              <Typography color={props.page !== Page.Achievements ? "secondary" : "primary"}>{t("sidebar:achievements")}</Typography>
             </ListItemText>
           </ListItem>
           <ListItem
             button
-            key={"Options"}
+            key={t("sidebar:options")}
             className={clsx({
               [classes.active]: props.page === Page.Options,
             })}
             onClick={clickOptions}
           >
             <ListItemIcon>
-              <Tooltip title={!open ? "Options" : ""}>
+              <Tooltip title={!open ? t("sidebar:options") : ""}>
                 <SettingsIcon color={props.page !== Page.Options ? "secondary" : "primary"} />
               </Tooltip>
             </ListItemIcon>
             <ListItemText>
-              <Typography color={props.page !== Page.Options ? "secondary" : "primary"}>Options</Typography>
+              <Typography color={props.page !== Page.Options ? "secondary" : "primary"}>{t("sidebar:options")}</Typography>
             </ListItemText>
           </ListItem>
           {process.env.NODE_ENV === "development" && (
             <ListItem
               classes={{ root: classes.listitem }}
               button
-              key={"Dev"}
+              key={t("sidebar:dev")}
               className={clsx({
                 [classes.active]: props.page === Page.DevMenu,
               })}
               onClick={clickDev}
             >
               <ListItemIcon>
-                <Tooltip title={!open ? "Dev" : ""}>
+                <Tooltip title={!open ? t("sidebar:dev") : ""}>
                   <DeveloperBoardIcon color={props.page !== Page.DevMenu ? "secondary" : "primary"} />
                 </Tooltip>
               </ListItemIcon>
               <ListItemText>
-                <Typography color={props.page !== Page.DevMenu ? "secondary" : "primary"}>Dev</Typography>
+                <Typography color={props.page !== Page.DevMenu ? "secondary" : "primary"}>{t("sidebar:dev")}</Typography>
               </ListItemText>
             </ListItem>
           )}
