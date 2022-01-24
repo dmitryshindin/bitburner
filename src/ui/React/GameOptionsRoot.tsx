@@ -31,6 +31,7 @@ import { StyleEditorModal } from "./StyleEditorModal";
 
 import { SnackbarEvents } from "./Snackbar";
 
+import i18n from "../../i18n/config";
 import { Settings } from "../../Settings/Settings";
 import { save } from "../../db";
 import { formatTime } from "../../utils/helpers/formatTime";
@@ -107,6 +108,7 @@ export function GameOptionsRoot(props: IProps): React.ReactElement {
   function handleLocaleChange(event: SelectChangeEvent<string>): void {
     setLocale(event.target.value as string);
     Settings.Locale = event.target.value as string;
+    i18n.changeLanguage(Settings.Locale);
   }
 
   function handleTimestampFormatChange(event: React.ChangeEvent<HTMLInputElement>): void {

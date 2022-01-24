@@ -5,6 +5,7 @@ import { defaultStyles } from "./Styles";
 import { WordWrapOptions } from "../ScriptEditor/ui/Options";
 import { OverviewSettings } from "../ui/React/Overview";
 import { IStyleSettings } from "../ScriptEditor/NetscriptDefinitions";
+import i18n from "../../src/i18n/config";
 
 /**
  * Represents the default settings the player could customize.
@@ -260,5 +261,7 @@ export const Settings: ISettings & ISelfInitializer & ISelfLoading = {
     Object.assign(Settings.overview, save.overview);
     delete save.overview;
     Object.assign(Settings, save);
+    // change the language to loaded locale
+    i18n.changeLanguage(Settings.Locale);
   },
 };
